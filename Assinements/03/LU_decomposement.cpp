@@ -76,6 +76,7 @@ struct mtx {
             }
         }
     }
+
     friend std::pair<mtx, mtx> tridiagonalMatrix_LU_Decomposement(const mtx& A, int n) {
         mtx L = mtx(n, n);
         mtx U = A;
@@ -173,13 +174,13 @@ int main() {
     matrix A = matrix(n, n);
     for (int i = 1; i <= n; i++) std::cin >> A.a[i][i];
     for (int i = 1; i <= n - 1; i++) std::cin >> A.a[i][i + 1];
-    for (int i = 2; i <= n; i++) std::cin >> A.a[i][i - 1];
+    for (int i = 1; i <= n - 1; i++) std::cin >> A.a[i + 1][i];
     std::vector<double> b(n + 1);
     for (int i = 1; i <= n; i++) std::cin >> b[i];
 
     auto X = tridiagonalMatrixSolve(A, b, n);
     for (int i = 1; i <= n; i++) {
-        std::cout << std::fixed << std::setprecision(6) << "x_i = " << X[i] << '\n';
+        std::cout << std::fixed << std::setprecision(6) << "x_" << i << " = " << X[i] << '\n';
     }
 
 
@@ -191,7 +192,7 @@ int main() {
 
     X = cycleTridiagonalMatrixSolve(A, b, n);
     for (int i = 1; i <= n; i++) {
-        std::cout << std::fixed << std::setprecision(6) << "x_i = " << X[i] << '\n';
+        std::cout << std::fixed << std::setprecision(6) << "x_" << i << " = " << X[i] << '\n';
     }
 
     return 0;
